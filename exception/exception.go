@@ -4,6 +4,11 @@ import (
 	"fmt"
 )
 
+// ParseConfigFileError : custom exception
+func ParseConfigFileError(configFileName string, err error) error {
+	return fmt.Errorf("unable to parse configuration file [%s] : [%w]", configFileName, err)
+}
+
 // InitGitlabClientError : custom exception
 func InitGitlabClientError(err error) error {
 	return fmt.Errorf("unable to configure a Gitlab client : [%w]", err)

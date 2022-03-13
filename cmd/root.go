@@ -7,6 +7,7 @@ import (
 	"git-projects/internal/name"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )
 
@@ -68,7 +69,7 @@ func runInit(cmd *cobra.Command, args []string) error {
 	logger.Debug("start - runInit")
 
 	logger.Debug("Loading configuration...")
-	if err := config.LoadConfig(); err != nil {
+	if _, err := config.LoadConfig(cfgFile); err != nil {
 		return err
 	}
 	logger.Debug("end - runInit")
@@ -77,8 +78,8 @@ func runInit(cmd *cobra.Command, args []string) error {
 }
 
 // Fill paramValue with defaultValue if paramName is empty
-/* func fillStringParam(paramName string, defaultValue string, paramValue *string) {
+func fillStringParam(paramName string, defaultValue string, paramValue *string) {
 	if *paramValue == "" {
 		*paramValue = helper.Ternary(viper.GetString(paramName) == "", defaultValue, viper.GetString(paramName)).(string)
 	}
-} */
+}

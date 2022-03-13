@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// NewVersionCmd returns a new version command.
+// versionCmd returns a new version command.
 var versionCmd = &cobra.Command{
 	Use:     "version",
 	Short:   fmt.Sprintf("Show the %s version information", name.ApplicationName),
