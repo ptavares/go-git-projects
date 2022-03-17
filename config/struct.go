@@ -38,15 +38,42 @@ type SSHAuth struct {
 func (c *Config) String() string {
 	s := new(strings.Builder)
 	s.WriteString("{ ")
-	s.WriteString("ApiToken: \"")
+	s.WriteString("\"ApiToken\": \"")
 	s.WriteString(helper.MaskPassword(c.ApiToken))
-	s.WriteString("\" Domain: \"")
+	s.WriteString("\" \"Domain\": \"")
 	s.WriteString(c.Domain)
-	s.WriteString("\" CloneConfig: ")
+	s.WriteString("\" \"CloneConfig\": ")
 	s.WriteString(fmt.Sprintf("%+v", c.CloneConfig))
-	s.WriteString("\" BasicAuth: ")
+	s.WriteString("\" \"BasicAuth\": ")
 	s.WriteString(fmt.Sprintf("%+v", c.BasicAuth))
-	s.WriteString("\" SSHAuth: ")
+	s.WriteString("\" \"SSHAuth\": ")
 	s.WriteString(fmt.Sprintf("%+v", c.SSHAuth))
+	s.WriteString("}")
+	return s.String()
+}
+
+// String for BasicAuth (mask sensitive values)
+func (b *BasicAuth) String() string {
+	s := new(strings.Builder)
+	s.WriteString("{ ")
+	s.WriteString("\"UserName\": \"")
+	s.WriteString(b.UserName)
+	s.WriteString("\" \"Password\": \"")
+	s.WriteString(helper.MaskPassword(b.Password))
+	s.WriteString("\" \"Token\": \"")
+	s.WriteString(helper.MaskPassword(b.Token))
+	s.WriteString("}")
+	return s.String()
+}
+
+// String for SSHAuth (mask sensitive values)
+func (h *SSHAuth) String() string {
+	s := new(strings.Builder)
+	s.WriteString("{ ")
+	s.WriteString("\"PrivateKeyPath\": \"")
+	s.WriteString(h.PrivateKeyPath)
+	s.WriteString("\" \"PrivateKeyPassword\": \"")
+	s.WriteString(helper.MaskPassword(h.PrivateKeyPassword))
+	s.WriteString("}")
 	return s.String()
 }
