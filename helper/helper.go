@@ -2,7 +2,6 @@ package helper
 
 import (
 	"os"
-	"reflect"
 	"regexp"
 	"strings"
 
@@ -68,15 +67,9 @@ func HandleErrorExit(e error) {
 }
 
 // Ternary : Execute ternery condition with condition, return resultTrue if condition is true, restultFalse otherwise
-func Ternary(condition bool, resultTrue, restultFalse interface{}) interface{} {
+func Ternary[T any](condition bool, resultTrue, restultFalse T) T {
 	if condition {
-		if reflect.TypeOf(resultTrue).Kind() == reflect.Func {
-			return resultTrue.(func() interface{})()
-		}
 		return resultTrue
-	}
-	if reflect.TypeOf(restultFalse).Kind() == reflect.Func {
-		return restultFalse.(func() interface{})()
 	}
 	return restultFalse
 }

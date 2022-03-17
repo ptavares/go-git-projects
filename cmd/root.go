@@ -80,6 +80,6 @@ func runInit(cmd *cobra.Command, args []string) error {
 // Fill paramValue with defaultValue if paramName is empty
 func fillStringParam(paramName string, defaultValue string, paramValue *string) {
 	if *paramValue == "" {
-		*paramValue = helper.Ternary(viper.GetString(paramName) == "", defaultValue, viper.GetString(paramName)).(string)
+		*paramValue = helper.Ternary(viper.GetString(paramName) == "", defaultValue, viper.GetString(paramName))
 	}
 }

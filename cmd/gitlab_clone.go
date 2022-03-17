@@ -7,6 +7,7 @@ import (
 	"git-projects/gitlab"
 	"git-projects/helper"
 	"git-projects/internal/name"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -37,7 +38,8 @@ var gitlabCloneHTTPCmd = &cobra.Command{
 Command to clone Gitlab projects from repositories's HTTP URL
 
 `, name.ApplicationName),
-	Run: executeGitlabCloneHTTP,
+	PreRun: checkGitlabCloneArgument,
+	Run:    executeGitlabCloneHTTP,
 }
 
 // gitlabCloneSSHCmd represents the clone SSH command
@@ -52,7 +54,8 @@ var gitlabCloneSSHCmd = &cobra.Command{
 Command to clone Gitlab projects from repositories's SSH URL
 
 `, name.ApplicationName),
-	Run: executeGitlabCloneSSH,
+	PreRun: checkGitlabCloneArgument,
+	Run:    executeGitlabCloneSSH,
 }
 
 // init : Init Gitlab Clone sub commands
@@ -77,6 +80,26 @@ func init() {
 	config.AddEnvParam("SSH_KEY_PATH")
 	config.AddEnvParam("SSH_KEY_PWD")
 
+}
+
+func checkGitlabCloneArgument(cmd *cobra.Command, args []string) {
+	// Basic auth
+	fillStringParam("basic_auth_usr", config.GetConfig().BasicAuth.UserName, &basicAuthUsername)
+	fillStringParam("basic_auth_pwd", config.GetConfig().BasicAuth.Password, &basicAuthPassword)
+	fillStringParam("basic_auth_token", config.GetConfig().BasicAuth.Token, &basicAuthToken)
+	// SSH Auth
+	fillStringParam("ssh_key_path", config.GetConfig().SSHAuth.PrivateKeyPath, &sshPrivateKeyPath)
+	fillStringParam("ssh_key_pwd", config.GetConfig().SSHAuth.PrivateKeyPassword, &sshPrivateKeyPwd)
+
+	// Check authentication type
+	if sshPrivateKeyPath != "" && (basicAuthUsername != "" || basicAuthToken != "") {
+		logger.Info("error : only one type of authentication is available, choose between ssh or basic authentication ")
+		os.Exit(1)
+	}
+	if basicAuthUsername != "" && basicAuthToken != "" {
+		logger.Info("error : only one type of basic authentication is available, choose between username/password or token")
+		os.Exit(1)
+	}
 }
 
 // getAllProjects : Retrieve all Gitlab projects (optional : for a given group)
@@ -106,7 +129,7 @@ func executeGitlabCloneHTTP(cmd *cobra.Command, args []string) {
 	if basicAuthUsername != "" {
 		auth = git.NewBasicGitAuthentication(basicAuthUsername, basicAuthPassword)
 	} else {
-		auth = git.NewTokenGitAuthentication(helper.Ternary(basicAuthToken != "", basicAuthToken, apiUserToken).(string))
+		auth = git.NewTokenGitAuthentication(helper.Ternary(basicAuthToken != "", basicAuthToken, apiUserToken))
 	}
 
 	// Get all projects by Group

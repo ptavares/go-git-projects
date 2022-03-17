@@ -33,7 +33,7 @@ func init() {
 	// -> Flags for calling Gitlab API
 	gitlabCmd.PersistentFlags().StringVarP(&apiUserToken, "api-token", "t", "", fmt.Sprintf("valid private or personal token to call API methods which require authentication <%s_%s>", config.ENV_PREFIX, "API_TOKEN"))
 	gitlabCmd.PersistentFlags().StringVarP(&baseDomain, "domain", "", "gitlab.com", fmt.Sprintf("the domain where gitlab lives <%s_%s>", config.ENV_PREFIX, "DOMAIN"))
-	gitlabCmd.PersistentFlags().StringVarP(&gid, "group-id", "g", "", fmt.Sprintf("retrieve all projects under the given group ID <%s_%s>", config.ENV_PREFIX, "GROUP_ID"))
+	gitlabCmd.PersistentFlags().StringVarP(&gid, "group-id", "g", "", fmt.Sprintf("ID of the group who's repos should be cloned <%s_%s>", config.ENV_PREFIX, "GROUP_ID"))
 	gitlabCmd.PersistentFlags().StringVarP(&destination, "destination", "", "", fmt.Sprintf("directory destination where projects will be clone, default is current directory <%s_%s>", config.ENV_PREFIX, "DESTINATION"))
 
 	// Define persistent flags
@@ -51,7 +51,7 @@ func init() {
 // checkGitlabArguments : check CLI args
 func checkGitlabArguments(cmd *cobra.Command, args []string) error {
 	if err := rootCmd.PersistentPreRunE(cmd, args); err != nil {
-		return nil
+		return err
 	}
 
 	fillStringParam("api_token", config.GetConfig().ApiToken, &apiUserToken)
@@ -75,15 +75,6 @@ func checkGitlabArguments(cmd *cobra.Command, args []string) error {
 			logger.Infof("error : '%s' is invalid\n-> group-id must be an integer", gid)
 			os.Exit(1)
 		}
-	}
-	// Check authentication type
-	if sshPrivateKeyPath != "" && (basicAuthUsername != "" || basicAuthToken != "") {
-		logger.Info("error : only one type of authentication is available, choose between ssh or basic authentication ")
-		os.Exit(1)
-	}
-	if basicAuthUsername != "" && basicAuthToken != "" {
-		logger.Info("error : only one type of basic authentication is available, choose between username/password or token")
-		os.Exit(1)
 	}
 
 	return nil
