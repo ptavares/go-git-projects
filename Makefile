@@ -76,6 +76,8 @@ help: .do-help ; @ ## Show this help (Run make <target> V=1 to enable verbose)
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 	go install github.com/fzipp/gocyclo/cmd/gocyclo@latest
 	go install github.com/go-critic/go-critic/cmd/gocritic@latest
+	go get github.com/google/go-github/v43
+	go get github.com/google/go-github/v43/github
 	go mod download
 	go mod tidy
 
