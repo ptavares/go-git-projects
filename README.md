@@ -55,7 +55,11 @@ domain: my.custom.git.com   # The custom domain to use if different from default
 # Custom clone configuration
 clone_config:
   destination: /tmp/test    # Directory where all projects will be cloned
+  # Gitlab specific configuration
   group_id: 10              # Id of the group where projects are stored
+  # Github specific configuration (one of user or organization)
+  user: ptavares            # github user where projects are stored
+  organization: myorg       # github organization where projects are stored
 
 # If the api_token is not the one to use for cloning projects,
 # you can specify basic or ssh authentication method
