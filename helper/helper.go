@@ -61,7 +61,7 @@ func HandleError(e error) {
 // HandleErrorExit : Handle an error and exit
 func HandleErrorExit(e error) {
 	if e != nil {
-		GetLogger().Fatal(e)
+		GetLogger().Info(e)
 		os.Exit(1)
 	}
 }

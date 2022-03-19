@@ -17,8 +17,10 @@ type Config struct {
 
 // CloneConfig: contains clone custom configuration
 type CloneConfig struct {
-	Destination string `mapstructure:"destination,omitempty"`
-	GroupID     string `mapstructure:"group_id,omitempty"`
+	Destination  string `mapstructure:"destination,omitempty"`
+	GroupID      string `mapstructure:"group_id,omitempty"`
+	User         string `mapstructure:"user,omitempty"`
+	Organization string `mapstructure:"organization,omitempty"`
 }
 
 // BasicAuth: define clone basic authentication

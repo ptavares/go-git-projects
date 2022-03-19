@@ -2,6 +2,7 @@ package github
 
 import (
 	"context"
+	"fmt"
 	"git-projects/exception"
 	"git-projects/git"
 	"git-projects/helper"
@@ -106,7 +107,8 @@ func (c *Client) GetProjectsFromGID(gid string, isUser bool) ([]*git.Group, erro
 
 		if err != nil {
 			return []*git.Group{},
-				exception.SimpleError("failed to retrieve Github Projects", err)
+				exception.SimpleError(
+					fmt.Sprintf("failed to retrieve Github Projects. Is '%s' a %s ? ", gid, helper.Ternary(isUser, "user", "organization")), err)
 		}
 
 		for _, repository := range repositories {

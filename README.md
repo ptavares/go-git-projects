@@ -30,7 +30,7 @@ This project aims to facilitate the cloning of all Git projects authorized to a 
 ## Already availabe
 
 - [X] Gitlab clone
-- [ ] GitHub clone
+- [X] GitHub clone
 
 ## Usage
 

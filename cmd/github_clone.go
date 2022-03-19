@@ -113,7 +113,7 @@ func getAllGithubProjects() []*git.Group {
 
 	// Retrieve all projects
 	// 491 for cld
-	groups, err := client.GetProjectsFromGID(gid, true)
+	groups, err := client.GetProjectsFromGID(gid, isUser)
 	if err != nil {
 		helper.HandleErrorExit(err)
 	}
