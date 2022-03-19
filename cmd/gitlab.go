@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const default_gitlab_domain = "gitlab.com"
+
 // gitlabCmd represents the config command
 var gitlabCmd = &cobra.Command{
 	Use:   "gitlab",
@@ -32,7 +34,7 @@ func init() {
 	// Common Gitlab flags
 	// -> Flags for calling Gitlab API
 	gitlabCmd.PersistentFlags().StringVarP(&apiUserToken, "api-token", "t", "", fmt.Sprintf("valid private or personal token to call API methods which require authentication <%s_%s>", config.ENV_PREFIX, "API_TOKEN"))
-	gitlabCmd.PersistentFlags().StringVarP(&baseDomain, "domain", "", "gitlab.com", fmt.Sprintf("the domain where gitlab lives <%s_%s>", config.ENV_PREFIX, "DOMAIN"))
+	gitlabCmd.PersistentFlags().StringVarP(&baseDomain, "domain", "", default_gitlab_domain, fmt.Sprintf("the domain where gitlab lives <%s_%s>", config.ENV_PREFIX, "DOMAIN"))
 	gitlabCmd.PersistentFlags().StringVarP(&gid, "group-id", "g", "", fmt.Sprintf("ID of the group who's repos should be cloned <%s_%s>", config.ENV_PREFIX, "GROUP_ID"))
 	gitlabCmd.PersistentFlags().StringVarP(&destination, "destination", "", "", fmt.Sprintf("directory destination where projects will be clone, default is current directory <%s_%s>", config.ENV_PREFIX, "DESTINATION"))
 
@@ -67,6 +69,8 @@ func checkGitlabArguments(cmd *cobra.Command, args []string) error {
 	fillStringParam("domain", config.GetConfig().Domain, &localDomain)
 	if localDomain != "" {
 		baseDomain = localDomain
+	} else {
+		baseDomain = default_gitlab_domain
 	}
 
 	// Check that Gid is a integer

@@ -60,6 +60,10 @@ func NewClient(token, domain string) (*Client, error) {
 func (c *Client) GetProjectsFromGID(gid string) ([]*git.Group, error) {
 	logger := helper.GetLogger()
 
+	logger.With(
+		zap.String("gid", gid),
+	).Debug("start - GetProjectsFromGID")
+
 	groupList := make([]*git.Group, 0)
 	var err error
 	var resp *gitlab.Response

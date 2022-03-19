@@ -14,6 +14,11 @@ func InitGitlabClientError(err error) error {
 	return fmt.Errorf("unable to configure a Gitlab client : [%w]", err)
 }
 
+// InitGitHubClientError : custom exception
+func InitGitHubClientError(err error) error {
+	return fmt.Errorf("unable to configure a GitHub client : [%w]", err)
+}
+
 // APICallError : custom exception
 func APICallError(message string) error {
 	return fmt.Errorf("%s", message)
