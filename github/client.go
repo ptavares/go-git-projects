@@ -63,10 +63,6 @@ func NewClient(token, domain string) (*Client, error) {
 		}}, nil
 }
 
-type GithubRepoOptions interface {
-	*github.RepositoryListOptions | *github.RepositoryListByOrgOptions
-}
-
 // GetProjectsFromGID : Retrieve all user Github's Group projects
 func (c *Client) GetProjectsFromGID(gid string, isUser bool) ([]*git.Group, error) {
 	logger := helper.GetLogger()
