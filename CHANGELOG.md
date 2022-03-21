@@ -1,5 +1,18 @@
 # Changelog
 
+<a name="0.1.1"></a>
+## 0.1.1 (2022-03-21)
+
+### Changed
+
+- 🚨 fmt [[e3c6e10](https://github.com/ptavares/go-git-projects/commit/e3c6e1008d1dd5e0c377712a11070d602be001af)]
+
+### Fixed
+
+- ✏️ add gitlab doc and readme [[3a1c6d4](https://github.com/ptavares/go-git-projects/commit/3a1c6d436726c952cef6ba442face1ca4dafaf7c)]
+- ✏️ add github doc and readme [[03d2f56](https://github.com/ptavares/go-git-projects/commit/03d2f564e57efa934933f81f5e7b4fc65e1da884)]
+
+
 <a name="0.1.0"></a>
 ## 0.1.0 (2022-03-20)
 
