@@ -38,6 +38,51 @@ var gitlabCloneHTTPCmd = &cobra.Command{
 Command to clone Gitlab projects from repositories's HTTP URL
 
 `, name.ApplicationName),
+	Example: fmt.Sprintf(`
+  # =========================
+  # Cloning all user projects
+  # =========================
+  -> Using same token for cloning
+  %s gitlab clone http -t <token>
+  %s gitlab clone http -t <token> --destination /tmp/dest
+
+  -> Using basic auth token
+  %s gitlab clone http -t <token> --basic-auth-token <cloning_token>
+
+  -> Using basic auth user/pwd
+  %s gitlab clone http -t <token> --basic-auth-username <cloning_user_name> --basic-auth-password <cloning_user_password>
+
+  # =================================
+  # Cloning all GroupId projects
+  # =================================
+  -> Using same token for cloning
+  %s gitlab clone http -t <token> -g <gitlab_group_id>
+  %s gitlab clone http -t <token> -g <gitlab_group_id> --destination ./gitlab
+
+  -> Using basic auth token
+  %s gitlab clone http -t <token> -g <gitlab_group_id> --basic-auth-token <cloning_token>
+
+  -> Using basic auth user/pwd
+  %s gitlab clone http -t <token> -g <gitlab_group_id> --basic-auth-username <cloning_user_name> --basic-auth-password <cloning_user_password>
+
+  # ======================================
+  # Cloning all projects using config file
+  # ======================================
+  -> Config in  default location
+  %s gitlab clone http
+
+  -> Specify custom file
+  %s gitlab clone http -c <path_to_config_file>
+
+  # ======================================
+  # Entreprise Gitlab domain
+  # ======================================
+  -> Use "--domain" flag
+  %s gitlab clone http -d <entreprise_domain>
+  `,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName,
+		name.ApplicationName),
 	PreRun: checkGitlabCloneArgument,
 	Run:    executeGitlabCloneHTTP,
 }
@@ -54,6 +99,44 @@ var gitlabCloneSSHCmd = &cobra.Command{
 Command to clone Gitlab projects from repositories's SSH URL
 
 `, name.ApplicationName),
+	Example: fmt.Sprintf(`
+  # =========================
+  # Cloning all user projects
+  # =========================
+  -> Using same token for cloning
+  %s gitlab clone ssh -t <token>
+  %s gitlab clone ssh -t <token> --destination /tmp/dest
+
+  -> Using ssh auth file
+  %s gitlab clone ssh -t <token> --ssh-private-key-path <path_to_privat_key> --ssh-private-key-password <optional_key_password>
+
+  # =================================
+  # Cloning all GroupId projects
+  # =================================
+  -> Using same token for cloning
+  %s gitlab clone ssh -t <token> -g <gitlab_group_id>
+  %s gitlab clone ssh -t <token> -g <gitlab_group_id> --destination ./gitlab
+
+  -> Using ssh auth file
+  %s gitlab clone ssh -t <token> -g <gitlab_group_id> --ssh-private-key-path <path_to_privat_key> --ssh-private-key-password <optional_key_password>
+
+  # ======================================
+  # Cloning all projects using config file
+  # ======================================
+  -> Config in  default location
+  %s gitlab clone ssh
+
+  -> Specify custom file
+  %s gitlab clone ssh -c <path_to_config_file>
+
+  # ======================================
+  # Entreprise Github domain
+  # ======================================
+  -> Use "--domain" flag
+  %s gitlab clone ssh -d <entreprise_domain>
+  `,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName),
 	PreRun: checkGitlabCloneArgument,
 	Run:    executeGitlabCloneSSH,
 }
