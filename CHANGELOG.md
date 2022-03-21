@@ -1,5 +1,20 @@
 # Changelog
 
+<a name="0.2.0"></a>
+## 0.2.0 (2022-03-21)
+
+### Added
+
+- ✨ add go releaser configuration [[bbd5af9](https://github.com/ptavares/go-git-projects/commit/bbd5af953823916e996b0be7b724996ce4069c12)]
+- ✨ add some new informations [[b5552dc](https://github.com/ptavares/go-git-projects/commit/b5552dc3f4baf920132ddedf9a95e2f5621e53a9)]
+- ✨ init goreleaser [[2d93129](https://github.com/ptavares/go-git-projects/commit/2d931297ad7b688b8e02713d415521618f28329e)]
+
+### Miscellaneous
+
+-  Merge pull request [#2](https://github.com/ptavares/go-git-projects/issues/2) from ptavares/feat/add-go-releaser [[31bf587](https://github.com/ptavares/go-git-projects/commit/31bf587620fc04a7cd0cf036885d4c87f25fe991)]
+- 🙈 add ignore [[64e5010](https://github.com/ptavares/go-git-projects/commit/64e501070bbe90147dd54d6c585adece216c84ab)]
+
+
 <a name="0.1.2"></a>
 ## 0.1.2 (2022-03-21)
 
