@@ -38,6 +38,51 @@ var githubCloneHTTPCmd = &cobra.Command{
 Command to clone Github projects from repositories's HTTP URL
 
 `, name.ApplicationName),
+	Example: fmt.Sprintf(`
+  # =========================
+  # Cloning all user projects
+  # =========================
+  -> Using same token for cloning
+  %s github clone http -t <token> -u <github_username>
+  %s github clone http -t <token> -u <github_username> --destination /tmp/dest
+
+  -> Using basic auth token
+  %s github clone http -t <token> -u <github_username> --basic-auth-token <cloning_token>
+
+  -> Using basic auth user/pwd
+  %s github clone http -t <token> -u <github_username> --basic-auth-username <cloning_user_name> --basic-auth-password <cloning_user_password>
+
+  # =================================
+  # Cloning all organization projects
+  # =================================
+  -> Using same token for cloning
+  %s github clone http -t <token> -o <github_organization>
+  %s github clone http -t <token> -o <github_organization> --destination ./github
+
+  -> Using basic auth token
+  %s github clone http -t <token> -o <github_organization> --basic-auth-token <cloning_token>
+
+  -> Using basic auth user/pwd
+  %s github clone http -t <token> -o <github_organization> --basic-auth-username <cloning_user_name> --basic-auth-password <cloning_user_password>
+
+  # ======================================
+  # Cloning all projects using config file
+  # ======================================
+  -> Config in  default location
+  %s github clone http
+
+  -> Specify custom file
+  %s github clone http -c <path_to_config_file>
+
+  # ======================================
+  # Entreprise Github domain
+  # ======================================
+  -> Use "--domain" flag
+  %s github clone http -d <entreprise_domain>
+  `,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName,
+		name.ApplicationName),
 	PreRun: checkGithubCloneArgument,
 	Run:    executeGithubCloneHTTP,
 }
@@ -54,6 +99,44 @@ var githubCloneSSHCmd = &cobra.Command{
 Command to clone Github projects from repositories's SSH URL
 
 `, name.ApplicationName),
+	Example: fmt.Sprintf(`
+  # =========================
+  # Cloning all user projects
+  # =========================
+  -> Using same token for cloning
+  %s github clone ssh -t <token> -u <github_username>
+  %s github clone ssh -t <token> -u <github_username> --destination /tmp/dest
+
+  -> Using ssh auth file
+  %s github clone ssh -t <token> -u <github_username> --ssh-private-key-path <path_to_privat_key> --ssh-private-key-password <optional_key_password>
+
+  # =================================
+  # Cloning all organization projects
+  # =================================
+  -> Using same token for cloning
+  %s github clone ssh -t <token> -o <github_organization>
+  %s github clone ssh -t <token> -o <github_organization> --destination ./github
+
+  -> Using ssh auth file
+  %s github clone ssh -t <token> -o <github_organization> --ssh-private-key-path <path_to_privat_key> --ssh-private-key-password <optional_key_password>
+
+  # ======================================
+  # Cloning all projects using config file
+  # ======================================
+  -> Config in  default location
+  %s github clone ssh
+
+  -> Specify custom file
+  %s github clone ssh -c <path_to_config_file>
+
+  # ======================================
+  # Entreprise Github domain
+  # ======================================
+  -> Use "--domain" flag
+  %s github clone ssh -d <entreprise_domain>
+  `,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName,
+		name.ApplicationName, name.ApplicationName, name.ApplicationName, name.ApplicationName),
 	PreRun: checkGithubCloneArgument,
 	Run:    executeGithubCloneSSH,
 }

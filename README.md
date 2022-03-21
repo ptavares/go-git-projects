@@ -18,6 +18,8 @@ _This documentation section is generated automatically_
   - [Project Information](#project-information)
   - [Already availabe](#already-availabe)
   - [Usage](#usage)
+    - [Available environment vars](#available-environment-vars)
+    - [CLI](#cli)
     - [Configuration file](#configuration-file)
   - [License](#license)
 
@@ -33,6 +35,244 @@ This project aims to facilitate the cloning of all Git projects authorized to a 
 - [X] GitHub clone
 
 ## Usage
+
+You can find here a list of common usage for this application
+
+### Available environment vars
+
+You can use some environments variables with this CLI to avoid passing arguments.
+You don't need to setup all of them, it depends on witch command you want to use.
+
+There are indicated in help command usage, and started with `GIT_PROJECT_` prefix.
+
+### CLI
+
+#### Root Command
+
+```
+=======================================================================
+=                           git-projects                              =
+=======================================================================
+
+A CLI to easyli clone/sync git projects from :
+  -> Gitlab
+  -> Github
+
+Usage:
+  git-projects [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  github      Perform git-projects Github actions
+  gitlab      Perform git-projects Gitlab actions
+  help        Help about any command
+  version     Show the git-projects version information
+
+Flags:
+  -c, --config string   config yaml file (default are : ${HOME}/.git-projects[.yaml] or ${PWD}/.git-projects[.yaml])
+  -d, --debug           show debug message
+  -h, --help            help for git-projects
+
+Use "git-projects [command] --help" for more information about a command.
+```
+
+#### Github SubCommand
+
+```
+=======================================================================
+=                        git-projects github                          =
+=======================================================================
+
+Command to interract with Github
+
+Usage:
+  git-projects github [command]
+
+Available Commands:
+  clone       Perform git-projects Github clone actions
+
+Flags:
+  -t, --api-token string      valid private or personal token to call API methods which require authentication <GIT_PROJECTS_API_TOKEN>
+      --destination string    directory destination where projects will be clone, default is current directory <GIT_PROJECTS_DESTINATION>
+      --domain string         the domain where github lives <GIT_PROJECTS_DOMAIN> (default "github.com")
+  -h, --help                  help for github
+  -o, --organization string   organization name who's repos should be cloned <GIT_PROJECTS_ORGANIZATION>
+  -u, --user string           user name who's repos should be cloned <GIT_PROJECTS_USER>
+
+Global Flags:
+  -c, --config string   config yaml file (default are : ${HOME}/.git-projects[.yaml] or ${PWD}/.git-projects[.yaml])
+  -d, --debug           show debug message
+
+Use "git-projects github [command] --help" for more information about a command.
+```
+
+##### Github Clone SubCommand
+
+1. Clone from HTTP
+
+```
+=======================================================================
+=                   git-projects github clone HTTP                    =
+=======================================================================
+
+Command to clone Github projects from repositories's HTTP URL
+
+Usage:
+  git-projects github clone http [flags]
+
+Examples:
+
+  # =========================
+  # Cloning all user projects
+  # =========================
+  -> Using same token for cloning
+  git-projects github clone http -t <token> -u <github_username>
+  git-projects github clone http -t <token> -u <github_username> --destination /tmp/dest
+
+  -> Using basic auth token
+  git-projects github clone http -t <token> -u <github_username> --basic-auth-token <cloning_token>
+
+  -> Using basic auth user/pwd
+  git-projects github clone http -t <token> -u <github_username> --basic-auth-username <cloning_user_name> --basic-auth-password <cloning_user_password>
+
+  # =================================
+  # Cloning all organization projects
+  # =================================
+  -> Using same token for cloning
+  git-projects github clone http -t <token> -o <github_organization>
+  git-projects github clone http -t <token> -o <github_organization> --destination ./github
+
+  -> Using basic auth token
+  git-projects github clone http -t <token> -o <github_organization> --basic-auth-token <cloning_token>
+
+  -> Using basic auth user/pwd
+  git-projects github clone http -t <token> -o <github_organization> --basic-auth-username <cloning_user_name> --basic-auth-password <cloning_user_password>
+
+  # ======================================
+  # Cloning all projects using config file
+  # ======================================
+  -> Config in  default location
+  git-projects github clone http
+
+  -> Specify custom file
+  git-projects github clone http -c <path_to_config_file>
+
+  # ======================================
+  # Entreprise Github domain
+  # ======================================
+  -> Use "--domain" flag
+  git-projects github clone http -d <entreprise_domain>
+
+
+Flags:
+      --basic-auth-password string   password related to 'basic-auth-username' <GIT_PROJECTS_BASIC_AUTH_PWD>
+      --basic-auth-token string      token to use to clone repository throw HTTP URL if different from 'api-token' <GIT_PROJECTS_BASIC_AUTH_TOKEN>
+      --basic-auth-username string   username to use to clone repository throw HTTP URL <GIT_PROJECTS_BASIC_AUTH_USR>
+  -h, --help                         help for http
+
+Global Flags:
+  -t, --api-token string      valid private or personal token to call API methods which require authentication <GIT_PROJECTS_API_TOKEN>
+  -c, --config string         config yaml file (default are : ${HOME}/.git-projects[.yaml] or ${PWD}/.git-projects[.yaml])
+  -d, --debug                 show debug message
+      --destination string    directory destination where projects will be clone, default is current directory <GIT_PROJECTS_DESTINATION>
+      --domain string         the domain where github lives <GIT_PROJECTS_DOMAIN> (default "github.com")
+  -o, --organization string   organization name who's repos should be cloned <GIT_PROJECTS_ORGANIZATION>
+  -u, --user string           user name who's repos should be cloned <GIT_PROJECTS_USER>
+```
+
+2. Clone form SSH
+
+```
+=======================================================================
+=                   git-projects github clone SSH                   =
+=======================================================================
+
+Command to clone Github projects from repositories's SSH URL
+
+Usage:
+  git-projects github clone ssh [flags]
+
+Examples:
+
+  # =========================
+  # Cloning all user projects
+  # =========================
+  -> Using same token for cloning
+  git-projects github clone ssh -t <token> -u <github_username>
+  git-projects github clone ssh -t <token> -u <github_username> --destination /tmp/dest
+
+  -> Using ssh auth file
+  git-projects github clone ssh -t <token> -u <github_username> --ssh-private-key-path <path_to_privat_key> --ssh-private-key-password <optional_key_password>
+
+  # =================================
+  # Cloning all organization projects
+  # =================================
+  -> Using same token for cloning
+  git-projects github clone ssh -t <token> -o <github_organization>
+  git-projects github clone ssh -t <token> -o <github_organization> --destination ./github
+
+  -> Using ssh auth file
+  git-projects github clone ssh -t <token> -o <github_organization> --ssh-private-key-path <path_to_privat_key> --ssh-private-key-password <optional_key_password>
+
+  # ======================================
+  # Cloning all projects using config file
+  # ======================================
+  -> Config in  default location
+  git-projects github clone ssh
+
+  -> Specify custom file
+  git-projects github clone ssh -c <path_to_config_file>
+
+  # ======================================
+  # Entreprise Github domain
+  # ======================================
+  -> Use "--domain" flag
+  git-projects github clone ssh -d <entreprise_domain>
+
+
+Flags:
+  -h, --help                              help for ssh
+      --ssh-private-key-password string   optional password to decrypt private key <GIT_PROJECTS_SSH_KEY_PWD>
+      --ssh-private-key-path string       path to private key file used to clone repository throw SSH URL <GIT_PROJECTS_SSH_KEY_PATH>
+
+Global Flags:
+  -t, --api-token string      valid private or personal token to call API methods which require authentication <GIT_PROJECTS_API_TOKEN>
+  -c, --config string         config yaml file (default are : ${HOME}/.git-projects[.yaml] or ${PWD}/.git-projects[.yaml])
+  -d, --debug                 show debug message
+      --destination string    directory destination where projects will be clone, default is current directory <GIT_PROJECTS_DESTINATION>
+      --domain string         the domain where github lives <GIT_PROJECTS_DOMAIN> (default "github.com")
+  -o, --organization string   organization name who's repos should be cloned <GIT_PROJECTS_ORGANIZATION>
+  -u, --user string           user name who's repos should be cloned <GIT_PROJECTS_USER>
+```
+
+#### Gitlab SubCommand
+
+```
+=======================================================================
+=                        git-projects gitlab                          =
+=======================================================================
+
+Command to interract with Gitlab
+
+Usage:
+  git-projects gitlab [command]
+
+Available Commands:
+  clone       Perform git-projects Gitlab clone actions
+
+Flags:
+  -t, --api-token string     valid private or personal token to call API methods which require authentication <GIT_PROJECTS_API_TOKEN>
+      --destination string   directory destination where projects will be clone, default is current directory <GIT_PROJECTS_DESTINATION>
+      --domain string        the domain where gitlab lives <GIT_PROJECTS_DOMAIN> (default "gitlab.com")
+  -g, --group-id string      ID of the group who's repos should be cloned <GIT_PROJECTS_GROUP_ID>
+  -h, --help                 help for gitlab
+
+Global Flags:
+  -c, --config string   config yaml file (default are : ${HOME}/.git-projects[.yaml] or ${PWD}/.git-projects[.yaml])
+  -d, --debug           show debug message
+
+Use "git-projects gitlab [command] --help" for more information about a command.
+```
 
 ### Configuration file
 
