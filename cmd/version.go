@@ -20,10 +20,12 @@ var versionCmd = &cobra.Command{
 =                           %s                              =
 =======================================================================
 version     : %s
+commit      : %s
+date        : %s
 go version  : %s
 go compiler : %s
 platform    : %s/%s
-`, name.ApplicationName, version.Version, runtime.Version(), runtime.Compiler, runtime.GOOS, runtime.GOARCH)
+`, name.ApplicationName, version.Version, version.Commit, version.Date, runtime.Version(), runtime.Compiler, runtime.GOOS, runtime.GOARCH)
 		return nil
 	},
 }

@@ -18,3 +18,5 @@ build/
 # Custom
 .git-projects.*
 .git-projects
+
+dist/
