@@ -27,5 +27,3 @@
 
 -  Merge pull request [#1](https://github.com/ptavares/go-git-projects/issues/1) from ptavares/develop [[650b20a](https://github.com/ptavares/go-git-projects/commit/650b20a2f9450cfe4909e687506985e99075c0f4)]
 -  Initial commit [[c83af68](https://github.com/ptavares/go-git-projects/commit/c83af68e9f960b0ec280b76dd7413eaf3553943f)]
-
-
