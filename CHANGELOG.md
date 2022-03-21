@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.1.2"></a>
+## 0.1.2 (2022-03-21)
+
+### Fixed
+
+- 🐛 resolve README [[6a626e4](https://github.com/ptavares/go-git-projects/commit/6a626e47ce1b01792643094078c7bd90d27ffbd2)]
+
+
 <a name="0.1.1"></a>
 ## 0.1.1 (2022-03-21)
 
