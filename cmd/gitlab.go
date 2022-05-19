@@ -67,9 +67,12 @@ func checkGitlabArguments(cmd *cobra.Command, args []string) error {
 
 	var localDomain = ""
 	fillStringParam("domain", config.GetConfig().Domain, &localDomain)
+	logger.Debugf("localDomain : %s", localDomain)
+	logger.Debugf("baseDomain : %s", baseDomain)
+	logger.Debugf("default_gitlab_domain : %s", default_gitlab_domain)
 	if localDomain != "" {
 		baseDomain = localDomain
-	} else {
+	} else if baseDomain == "" {
 		baseDomain = default_gitlab_domain
 	}
 
