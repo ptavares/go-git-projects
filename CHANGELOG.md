@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.2.1"></a>
+## 0.2.1 (2022-05-19)
+
+### Fixed
+
+- 🐛 fix domain as optional [[a4c119c](https://github.com/ptavares/go-git-projects/commit/a4c119cbdc0397fc8397be746f7c1ef07ec95d20)]
+
+
 <a name="0.2.0"></a>
 ## 0.2.0 (2022-03-21)
 
